@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthVault - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Menu Styling */
+        .navbar {
+            background-color: #0047ab;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #003a8a;
+            color: white;
+        }
+
+        /* Content Styling */
+        .content {
+            padding: 20px;
+            margin-top: 60px; /* Add some space below the navbar */
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #0047ab;
+        }
+
+        /* Welcome Message */
+        #welcome-message {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        /* Appointment, Medication, About Us, Services, Health Recommendations Sections */
+        #appointment-details, #medication-details, #about-us, #services, #rewards, #health-recommendations {
+            display: none; /* Hidden by default */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="navbar">
+        <a href="#" onclick="showAppointment()">Appointment</a>
+        <a href="#" onclick="showMedication()">Medication List</a>
+        <a href="#" onclick="showAboutUs()">About Us</a>
+        <a href="#" onclick="showServices()">Services</a>
+        <a href="#" onclick="showRewards()">Rewards</a>
+        <a href="#" onclick="showHealthRecommendations()">Health Recommendations</a>
+    </div>
+
+    <!-- Main Content of the Page -->
+    <div class="content">
+        <!-- Welcome Message -->
+        <div id="welcome-message">
+            <h2>Welcome, <span id="username">User</span>!</h2>
+            <p>You have gained 5 points for logging in today.</p>
+            <p>Your current points: <span id="points"></span></p>
+        </div>
+
+        <!-- Appointment Section -->
+        <div id="appointment-details">
+            <h3>Your Next Appointment</h3>
+            <p><strong>Doctor:</strong> <span id="doctor-name"></span></p>
+            <p><strong>Time:</strong> <span id="appointment-time"></span></p>
+            <p><strong>Clinic Location:</strong> <span id="clinic-location"></span></p>
+            <p><strong>Description:</strong> <span id="appointment-description"></span></p>
+        </div>
+
+        <!-- Medication Section -->
+        <div id="medication-details">
+            <h3>Your Current Medication and Health Information</h3>
+            <p><strong>Medication/Treatment:</strong> <span id="medication"></span></p>
+            <p><strong>Vaccination Status:</strong> <span id="vaccination-status"></span></p>
+            <p><strong>Allergies:</strong> <span id="allergies"></span></p>
+        </div>
+
+        <!-- About Us Section -->
+        <div id="about-us">
+            <h3>About Us</h3>
+            <p>HealthVault is committed to improving health and wellness through innovative solutions. For more information, you can reach us at:</p>
+            <p><strong>Contact Number:</strong> +1 (123) 456-7890</p>
+            <p><strong>Email:</strong> contact@healthvault.com</p>
+        </div>
+
+        <!-- Services Section -->
+        <div id="services">
+            <h3>Our Services</h3>
+            <ul>
+                <li>We provide educational programs to raise health awareness and improve well-being.</li>
+                <li>Personalized exercise routines tailored to your fitness and health goals.</li>
+                <li>Mental health consultations and tips to improve your emotional well-being.</li>
+            </ul>
+        </div>
+
+        <!-- Rewards Section -->
+        <div id="rewards">
+            <h3>Rewards System</h3>
+            <p>You accumulate points by logging in daily. When you reach 1000 points, you'll receive a voucher!</p>
+            <p>Current Points: <span id="reward-points"></span></p>
+            <button onclick="claimVoucher()" id="claim-voucher-btn" disabled>Claim Voucher</button>
+        </div>
+
+        <!-- Health Recommendations Section -->
+        <div id="health-recommendations">
+            <h3>Health Recommendations</h3>
+            <h4>Your Diet Plan</h4>
+            <p><span id="diet-plan">Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins.</span></p>
+            <h4>Lifestyle Tips</h4>
+            <p><span id="lifestyle-tips">Stay active, get adequate sleep, and manage stress effectively.</span></p>
+            <h4>Seasonal Health Tips</h4>
+            <p><span id="seasonal-tips">During winter, ensure to stay warm and get your flu vaccine. In summer, stay hydrated and protect your skin from the sun.</span></p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Example user data
+        const userData = {
+            username: "JohnDoe", // Replace with actual username
+            points: 0  // Initialize points
+        };
+
+        // Example appointment data
+        const appointmentData = {
+            doctor: "Dr. Jane Smith",
+            time: "10:00 AM, October 12, 2024",
+            clinicLocation: "HealthVault Clinic, Downtown",
+            description: "General health check-up and consultation."
+        };
+
+        // Example medication data
+        const medicationData = {
+            medication: "Metformin 500mg - Twice daily",
+            vaccinationStatus: "Fully vaccinated (COVID-19, Flu)",
+            allergies: "Penicillin, Pollen"
+        };
+
+        // Function to load user details on page load
+        function loadUserDetails() {
+            // Display username
+            document.getElementById("username").innerText = userData.username;
+
+            // Update points (increase by 5 for logging in)
+            userData.points += 5;
+            document.getElementById("points").innerText = userData.points;
+
+            // Update reward points section
+            document.getElementById("reward-points").innerText = userData.points;
+
+            // Enable voucher claim button if points reach 1000
+            if (userData.points >= 1000) {
+                document.getElementById("claim-voucher-btn").disabled = false;
+            }
+        }
+
+        // Function to claim the voucher when points reach 1000
+        function claimVoucher() {
+            alert("Congratulations! You've claimed your voucher!");
+            userData.points -= 1000; // Deduct 1000 points
+            document.getElementById("points").innerText = userData.points;
+            document.getElementById("reward-points").innerText = userData.points;
+
+            // Disable the claim button if points drop below 1000
+            if (userData.points < 1000) {
+                document.getElementById("claim-voucher-btn").disabled = true;
+            }
+        }
+
+        // Function to show the appointment details when the Appointment tab is clicked
+        function showAppointment() {
+            document.getElementById("doctor-name").innerText = appointmentData.doctor;
+            document.getElementById("appointment-time").innerText = appointmentData.time;
+            document.getElementById("clinic-location").innerText = appointmentData.clinicLocation;
+            document.getElementById("appointment-description").innerText = appointmentData.description;
+
+            // Show the appointment details section
+            document.getElementById("appointment-details").style.display = "block";
+
+            // Hide other sections
+            hideOtherSections("appointment-details");
+        }
+
+        // Function to show the medication and health details when the Medication List tab is clicked
+        function showMedication() {
+            document.getElementById("medication").innerText = medicationData.medication;
+            document.getElementById("vaccination-status").innerText = medicationData.vaccinationStatus;
+            document.getElementById("allergies").innerText = medicationData.allergies;
+
+            // Show the medication details section
+            document.getElementById("medication-details").style.display = "block";
+
+            // Hide other sections
+            hideOtherSections("medication-details");
+        }
+
+        // Function to show the About Us section
+        function showAboutUs() {
+            document.getElementById("about-us").style.display = "block";
+            hideOtherSections("about-us");
+        }
+
+        // Function to show the Services section
+        function showServices() {
+            document.getElementById("services").style.display = "block";
+            hideOtherSections("services");
+        }
+
+        // Function to show the Rewards section
+        function showRewards() {
+            document.getElementById("rewards").style.display = "block";
+            hideOtherSections("rewards");
+        }
+
+        // Function to show the Health Recommendations section
+        function showHealthRecommendations() {
+            document.getElementById("health-recommendations").style.display = "block";
+            hideOtherSections("health-recommendations");
+        }
+
+        // Function to hide all other sections except the selected one
+        function hideOtherSections(exceptId) {
+            const sections = ["appointment-details", "medication-details", "about-us", "services", "rewards", "health-recommendations"];
+            sections.forEach(sectionId => {
+                if (sectionId !== exceptId) {
+                    document.getElementById(sectionId).style.display = "none";
+                }
+            });
+        }
+
+        // Load user details when the page is ready
+        window.onload = loadUserDetails;
+    </script>
+</body>
+</html>

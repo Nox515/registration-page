@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HealthVault</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .navbar {
+            background-color: #0078D7;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            color: white;
+            margin: 0;
+        }
+        .tab-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .tab {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #0078D7;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #005A9E;
+        }
+        .content {
+            margin: 20px;
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        .report-container {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #0078D7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #005A9E;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>Admin Dashboard - HealthVault</h1>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab active" onclick="showTab('non-chronic')">Non-Chronic Conditions</div>
+        <div class="tab" onclick="showTab('chronic')">Chronic Conditions</div>
+        <div class="tab" onclick="showTab('reports')">Reports</div>
+    </div>
+
+    <!-- Non-Chronic Conditions Content -->
+    <div id="non-chronic" class="content active">
+        <h2>Patients with Non-Chronic Conditions</h2>
+        <table>
+            <tr>
+                <th>Patient Name</th>
+                <th>Condition</th>
+                <th>Treatment/Medication</th>
+                <th>Date Visited</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>Flu</td>
+                <td>Antiviral Medication</td>
+                <td>2024-10-12</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Food Poisoning</td>
+                <td>Oral Rehydration Solution</td>
+                <td>2024-10-13</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Chronic Conditions Content -->
+    <div id="chronic" class="content">
+        <h2>Patients with Chronic Conditions</h2>
+        <table>
+            <tr>
+                <th>Patient Name</th>
+                <th>Condition</th>
+                <th>Treatment/Medication</th>
+                <th>Next Appointment</th>
+            </tr>
+            <tr>
+                <td>Michael Brown</td>
+                <td>Diabetes</td>
+                <td>Insulin Therapy</td>
+                <td>2024-11-01</td>
+            </tr>
+            <tr>
+                <td>Susan Green</td>
+                <td>Hypertension</td>
+                <td>ACE Inhibitors</td>
+                <td>2024-10-20</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Reports Content -->
+    <div id="reports" class="content">
+        <h2>Reports for Health Department</h2>
+        <div class="report-container">
+            <p>Total Non-Chronic Patients: <span id="nonChronicCount">2</span></p>
+            <p>Total Chronic Patients: <span id="chronicCount">2</span></p>
+            <button onclick="sendReport()">Send Report to Health Department</button>
+            <p class="success-message" id="successMessage">Report sent successfully!</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle tab switching
+        function showTab(tabId) {
+            document.querySelectorAll('.tab, .content').forEach(element => {
+                element.classList.remove('active');
+            });
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Function to send report and display success message
+        function sendReport() {
+            const nonChronicCount = document.getElementById('nonChronicCount').innerText;
+            const chronicCount = document.getElementById('chronicCount').innerText;
+
+            // Simulate sending report
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'block';
+            }, 500);
+
+            // Example backend call (replace with real API if needed)
+            // fetch('/sendReport', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ nonChronicCount, chronicCount })
+            // }).then(response => {
+            //     if (response.ok) {
+            //         document.getElementById('successMessage').style.display = 'block';
+            //     }
+            // }).catch(error => {
+            //     console.error('Error sending report:', error);
+            // });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Chronic Patient Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        section {
+            margin: 20px 0;
+        }
+        .points {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome, <span id="username">User</span></h1>
+    <p>You have gained 5 points for logging in!</p>
+</header>
+
+<section id="health-recommendations">
+    <h2>Health Recommendations</h2>
+    <p>Your personalized health tips and seasonal recommendations will be displayed here.</p>
+</section>
+
+<section id="medical-history">
+    <h2>Medical History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Diagnosis</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-01-15</td>
+                <td>Allergy</td>
+                <td>Diagnosed with seasonal allergies.</td>
+            </tr>
+            <tr>
+                <td>2024-06-20</td>
+                <td>Flu</td>
+                <td>Prescribed antiviral medication.</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="appointments">
+    <h2>Appointments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Doctor's Name</th>
+                <th>Clinic</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-10-15</td>
+                <td>Dr. Smith</td>
+                <td>Health Clinic A</td>
+                <td>Annual Checkup</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="prescription-list">
+    <h2>Prescription List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Medication</th>
+                <th>Dosage</th>
+                <th>Instructions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ibuprofen</td>
+                <td>200 mg</td>
+                <td>Take one tablet every 8 hours as needed.</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="about-us">
+    <h2>About Us</h2>
+    <p>HealthWellness is dedicated to providing quality healthcare and support to our patients. Our team is committed to helping you achieve your health goals.</p>
+    <p>Contact Us: healthwellness@example.com</p>
+</section>
+
+<section id="rewards">
+    <h2>Your Rewards</h2>
+    <p>You currently have <strong>5</strong> points. Accumulate 1000 points to earn a voucher!</p>
+</section>
+
+<script>
+    // Simulate fetching username from session storage or backend
+    const username = sessionStorage.getItem('username') || 'User';
+
+    // Display the username in the header
+    document.getElementById('username').textContent = username;
+
+    // Example: Setting a username (for testing purposes)
+    // Uncomment the following line to set a temporary username in session storage
+    // sessionStorage.setItem('username', 'JohnDoe');
+</script>
+
+</body>
+</html>

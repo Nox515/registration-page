@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthVault - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0047ab;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .role-selection {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0047ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #003a8a;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 5px 0;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login to HealthVault</h2>
+        <!-- Login Form -->
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <label for="condition">Select Condition:</label>
+            <select id="condition" required>
+                <option value="">--Select--</option>
+                <option value="chronic">Chronic Condition</option>
+                <option value="nonchronic">Non-Chronic Condition</option>
+            </select>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Handle form submission and redirect to the appropriate homepage
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const condition = document.getElementById('condition').value;
+
+            // Redirect to the appropriate homepage based on selected condition
+            if (condition === "chronic") {
+                window.location.href = "homepage.html"; // Chronic patient homepage
+            } else if (condition === "nonchronic") {
+                window.location.href = "nonchronicpage.html"; // Non-chronic patient homepage
+            } else {
+                alert("Please select a valid condition.");
+            }
+        });
+    </script>
+
+</body>
+</html>
